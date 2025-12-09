@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, m, k, x, y, i, ans = 0, flag = 1;
+    cin >> n >> m >> k;
+    int a[100001] = {0}, b[100001] = {0};
+    for (i = 0; i < n; i++) {
+        cin >> x;
+        if (a[x] < k) {
+            ans++;
+            a[x]++;
+        } else if (flag != 0) {
+            y = x;
+            x++;
+            if (b[y] != 0)
+                x = b[y];
+            flag = 0;
+            while (x != y) {
+                if (x == m + 1)
+                    x = 1;
+                if (x == y)
+                    break;
+                if (a[x] < k) {
+                    a[x]++;
+                    flag = 1;
+                    b[y] = x;
+                    break;
+                }
+                x++;
+            }
+        }
+    }
+    cout << n - ans;
+    return 0;
+}
